@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+    
+    {% if c_form %}
+        add new category
+    {% elif b_form %}
+    add brand
+    {% elif u_form %}
+    update product
+    {% elif product %}
+    delete {{product.name}}
+    {% else %}
+    add a new product
+    {% endif %}
+{% endblock title %}
+    
+
+
+{% block content %}
+    
+   
+   {% if c_form %}
+   {% if created %}
+   <div class="alert alert-success" role="alert">
+       your new Cartegory Has Been Added
+     </div>
+   {% endif %}
+       
+   <div>
+       <form action="" method="post" novalidate>
+           {% csrf_token %}
+           {{c_form | crispy}}
+           <button type="submit" class="btn btn-primary mt-3">add category</button>
+       </form>
+   </div>
+   {% elif b_form %}
+   <div>
+    <form action="" method="post" novalidate>
+        {% csrf_token %}
+        {{b_form | crispy}}
+        <button type="submit" class="btn btn-primary mt-3">add brand</button>
+    </form>
+    </div>
+    {% elif form %}
+    <div>
+        <form action="" method="post" novalidate enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form | crispy}}
+            <button type="submit" class="btn btn-primary mt-3">add now</button>
+        </form>
+        </div>
+    {% elif u_form %}
+    <div>
+        <form action="" method="post" novalidate enctype="multipart/form-data">
+            {% csrf_token %}
+            {{u_form | crispy}}
+            <button type="submit" class="btn btn-primary mt-3">update</button>
+        </form>
+        </div>
+    {% elif product %}
+    <div>
+        <form action="" method="post">
+            {% csrf_token %}
+            <p>
+                why you want to delete? "{{product.name}}"
+            </p>
+            <button type="submit" class="btn btn-primary mt-3">contiune </button>
+        </form>
+    </div>
+   {% endif %}
+    
+{% endblock content %}
+    

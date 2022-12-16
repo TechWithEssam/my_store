@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    my account
+{% endblock title %}
+    
+
+
+{% block content %}
+
+    <div class="container">
+      <div class="row">
+          <div id="bio" class="col-12 col-lg-6 text-center">
+              <h1>{{obj.name}}</h1>
+              <img src="{{obj.logo.url}}" class="img-fluid">
+          </div>
+          <div id="more" class="col-12 col-lg-6 mt-5">
+              <h2>{{obj.name}}</h2>
+              <ul>
+                  <li>Buyer: <b>@{{obj.buyer.user.username}}</b></li>
+                  <li>Email: {{obj.email}}</li>
+                  <li>Brief: {{obj.Brief}}</li>
+                  <li>Products: {{obj.my_products_count}}</li>
+                  <li>followers: {{obj.followers.count}}</li>
+              </ul>
+              <h2>Address</h2>
+              <ol>
+                  <li>Address: {{obj.address}}</li>
+                  <li>town: {{obj.town}}</li>
+                  <li>county: {{obj.county}}</li>
+                  <li>country: {{obj.country}}</li>
+                  <li>longitude: {{obj.longitude}} </li>
+                  <li>latitude: {{obj.latitude}}</li>
+                  <li>
+                    <a href="{% url 'accounts:update_account' %}" class="card-link">Update</a>
+                  <a href="{% url 'accounts:delete_account' obj.pk %}" class="card-link">Delete</a>
+                  </li>
+              </ol>
+              <a href="{% url 'accounts:my_orders_and_sales' %}">views orders client</a>
+              <a href="{% url 'users:my_profile' %}" class="btn btn-primary">My Conda Profile</a>
+          </div>
+      </div>
+  </div>
+<hr>
+  <div class="row row-cols-1 row-cols-md-2 g-4 mt-5">
+    {% for item in obj.my_products %}
+    <div class="col">
+      <div class="card">
+        <img src="{{item.image.url}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{item.name}}</h5>
+          <p class="card-text">{{item.description}}</p>
+          {% if profile.user.username == obj.buyer.user.username %}
+          <a href="{% url 'accounts:update_product' item.slug %}"><button type="button" class="btn btn-light text-dark me-2">Update</button></a>
+          <a href="{% url 'accounts:delete_product' item.slug %}"><button type="button" class="btn btn-primary">Delete</button></a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+{% endblock content %}
+    

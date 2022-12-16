@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    home
+{% endblock title %}
+    
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row clearfix">
+      {% for item in qs %}
+        <div class="col-lg-3 col-md-4 col-sm-12">
+            <div class="card product_item">
+                <div class="body">
+                    <div class="cp_img">
+                        <img src="{{item.image.url}}" alt="Product" class="img-fluid">
+                        <div class="hover">
+                           
+                            <form action="{% url 'store:add_to_cart' %}" method="post" class='product-form' id='{{item.id}}'>
+                              {% csrf_token %}
+                              <input type="hidden" name="product_pk" value="{{item.pk}}">
+                              <button type="submit"  class="btn btn-outline-secondary add-btn update-cart" id="product-btn{{item.pk}}"><a href="javascript:void(0);" class="btn btn-primary btn-sm waves-effect"><i class="zmdi zmdi-shopping-cart"></i></a></button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="product_details">
+                        <h5><a href="{% url 'store:detail' item.slug %}">{{item.name}}</a></h5>
+                        <ul class="product_price list-unstyled">
+                            {% if item.discount != 0 %}
+                            <li class="old_price">${{item.price}}</li> 
+                            <li class="new_price">${{item.new_price_after_dicount}}</li>
+                            {% else %}
+                            <li class="new_price">${{item.price}}</li>
+                            {% endif %} 
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+<!-- <div class="row row-cols-1 row-cols-md-2 g-4">
+  {% for item in qs %}
+  <div class="col">
+    <div class="card">
+      {% if item.discount != 0 %}
+               offer <b>{{item.discount}}</b>%
+            {% endif %}
+      <img src="{{item.image.url}}"" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{item.name}}</h5>
+        <p class="card-text">
+          <h4 ><strong>
+            {% if item.discount != 0 %}
+              <del>{{item.price}}</del> {{item.new_price_after_dicount}}
+            {% else %}
+            ${{item.price}}
+            {% endif %}
+          </strong></h4>
+          <p class="card-text">
+            <div class="box-element product">
+            <form action="{% url 'store:add_to_cart' %}" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="product_pk" value="{{item.pk}}">
+              <a class="btn btn-outline-success" href="{% url 'store:detail' item.slug %}">View</a>
+              <button  class="btn btn-outline-secondary add-btn update-cart" id="btn">Add to Cart</button>
+            </form>
+          </div>
+          </p>
+        </p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div> -->
+
+
+
+
+
+
+{% endblock content %}
+    
+
+

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    detail order for {{obj.user_order.user}}
+{% endblock title %}
+    
+
+
+{% block content %}
+<div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{obj.product.image.url}}" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{obj.product.name}}</h5>
+          <p class="card-text">Quantity: {{obj.quantity}}</p>
+                <h5>Address</h5>
+          <ul class="list-group list-group-horizontal-sm">
+            <li class="list-group-item">{{obj.first_name}}</li>
+            <li class="list-group-item">{{obj.last_name}}</li>
+            <li class="list-group-item">{{obj.zip_code}}</li>
+          </ul>
+          <ul class="list-group list-group-horizontal-md">
+            <li class="list-group-item">{{obj.address}}</li>
+            <li class="list-group-item">{{obj.address2}}</li>
+            <li class="list-group-item">{{obj.country}}</li>
+          </ul>
+          <ul class="list-group list-group-horizontal-lg">
+            <li class="list-group-item">{{obj.state}}</li>
+            <li class="list-group-item">{{obj.email}}</li>
+          </ul>
+          <p class="card-text"><small class="text-muted">{{obj.timestamp}}</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+    

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    {{qs.name}}
+{% endblock title %}
+    
+
+{% block content %}
+  <div class="container col-xxl-8 px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+      <div class="col-10 col-sm-8 col-lg-6">
+        <img src="{{qs.image.url}}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+      </div>
+      <div class="col-lg-6">
+        <h1 class="display-5 fw-bold lh-1 mb-3">{{qs.name}}</h1>
+        <p class="lead">Category: {{qs.category.name}}</p>
+        <p class="lead">Brand {{qs.brand.name}}</p>
+        <p class="lead"> {{qs.description}}</p>
+        <p class="lead"> salesman:<b><a href="{% url 'accounts:detail_buyer' qs.salesman.url %}">{{qs.salesman.buyer.user}}</a></b></p>
+        <h4 ><strong>
+          {% if qs.discount != 0 %}
+            <del>{{qs.price}}</del> | {{qs.new_price_after_dicount}} 
+          {% else %}
+          ${{qs.price}}
+          {% endif %}
+        </strong></h4>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+          <p class="card-text">
+            <div class="box-element product">
+          <form action="{% url 'store:add_to_cart' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="product_pk" value="{{qs.pk}}">
+            <button  class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+          </form>
+          </div>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+{% endblock content %}

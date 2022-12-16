@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    cart
+{% endblock title %}
+    
+
+{% block content %}
+    <!-- {% for item in cart %}
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            
+            {% if item.product.discount != 0 %}
+               offer <b>{{item.product.discount}}</b>%
+            {% endif %}
+                
+            <img src="{{item.product.image.url}}" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{item.product.name}}</h5>
+              <p class="card-text">
+                <form action="{% url 'store:add_to_cart' %}"class="col-md-12" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="product_pk" value="{{item.product.pk}}">
+                  <button class="btn btn-outline-black increase" type="submit">&plus;</button>
+                </form>
+                {{item.quantity}}
+                <form action="{% url 'store:minus_from_cart' %}"class="col-md-12" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="product_pk" value="{{item.product.pk}}">
+              <button class="btn btn-outline-black decrease" type="submit">&minus;</button>
+            </form>
+            <form action="{% url 'store:empty' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="empty_pk" value="{{item.product.pk}}">
+                <td><button type="submit" class="btn btn-black btn-sm">X</button></td></tr>
+              </form>
+              </p>
+              <p class="card-text"><small class="text-muted">{% if item.prodouct.discount != 0 %}
+                <del>{{item.product.price}}</del> {{item.product.new_price_after_dicount}}
+              {% else %}
+              ${{item.price}}
+              {% endif %}</small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    <p>
+        total {{total}}
+    </p>
+    
+    <p>
+        Quantity {{total_quantity}}
+    </p>
+    <p>
+        amonut {{total}}
+    </p> -->
+
+
+
+
+
+
+
+
+
+
+
+      <main class="page">
+         <section class="shopping-cart dark">
+           <div class="container">
+              <div class="content">
+               <div class="row">
+                 <div class="col-md-12 col-lg-8">
+                   <div class="items">
+                     <div class="product">
+                      {% for item in cart %}
+                       <div class="row">
+                         <div class="col-md-3">
+                           <img class="img-fluid mx-auto d-block image" src="{{item.product.image.url}}">
+                         </div>
+                         <div class="col-md-8">
+                           <div class="info">
+                             <div class="row">
+                               <div class="col-md-5 product-name">
+                                 <div class="product-name">
+                                   <a href="{% url 'store:detail' item.product.slug %}">{{item.product.name}}</a>
+                                   <div class="product-info">
+                                    <div>Category: <span class="value">{{item.product.category.name}}</span></div>
+                                     <div>Brand: <span class="value">{{item.product.brand.name}}</span></div>
+                                   </div>
+                                 </div>
+                               </div>
+                               <div class="col-md-4 quantity qunatity-count {{item.product.id}}">
+                                 <label for="quantity">Quantity:</label>
+                                 <form action="{% url 'store:add_to_cart' %}"class="col-md-12" method="POST">
+                                  {% csrf_token %}
+                                  <input type="hidden" name="product_pk" value="{{item.product.pk}}">
+                                <button class="btn btn-outline-black increase" type="submit">&plus;</button>
+                                </form>
+                                <input id="quantitycc" type="text" value ="{{item.quantity}}" class="form-control quantity-input">
+                                <form action="{% url 'store:minus_from_cart' %}"class="col-md-12" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="product_pk" value="{{item.product.pk}}">
+                                <button class="btn btn-outline-black decrease" type="submit">&minus;</button>
+                                </form>
+                                </div>
+                               <div class="col-md-3 price">
+                                 <span>${{item.product.new_price_after_dicount}}</span>
+                               </div>
+                             </div>
+                           </div>
+                         </div>
+                         
+                       </div>
+                       {% endfor %}
+                      </div>  
+                   </div>
+                 </div>
+                 <div class="col-md-12 col-lg-4">
+                   <div class="summary">
+                     <h3>Summary</h3>
+                     <div class="summary-item"><span class="text">Quantity</span><span class="price">{{total_quantity}}</span></div>
+                     <div class="summary-item"><span class="text">Subtotal</span><span class="price">{{total}}</span></div>
+                     <div class="summary-item"><span class="text">Shipping</span><span class="price">${{shopping}}</span></div>
+                     <div class="summary-item"><span class="text">Amount</span><span class="price">${{amonut}}</span></div>
+                     <a href="{% url 'store:shopping' %}"><button type="button" class="btn btn-primary btn-lg btn-block">Checkout</button></a>
+                   </div>
+                 </div>
+               </div> 
+             </div>
+           </div>
+        </section>
+      </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock content %}
+    

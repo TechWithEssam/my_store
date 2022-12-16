@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    register
+{% endblock title %}
+    
+{%load crispy_forms_tags %}
+
+{% block content %}
+ 
+<div class="mb-3">
+<form method="post" action="" novalidate>
+        {% csrf_token %}
+        
+        {% if messages %}
+        {% for message in messages %}
+            <p>{{message}}</p>
+        {% endfor %} 
+        {% endif %}
+        {{ form.as_p}}
+        <small>if you are have an account <a href="{% url 'users:login' %}">login</a></small>
+      <button type="submit" class="btn btn-primary mt-3">Submit</button>
+  </form>
+</div>
+
+{% endblock content %}
+    

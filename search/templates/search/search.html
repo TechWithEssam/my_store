@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    search
+{% endblock title %}
+    
+
+{% block content %}
+<div>
+    
+    {% if is_empty %}
+    <div class="alert alert-danger" role="alert">
+        product with this name not found 
+      </div>
+    {% else %}
+   
+    {% for item in qs %}
+    {{forloop.counter}}-<div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{{item.image.url}}" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title"><a href="{{item.detail_product_url}}">{{item.name}}</a></h5>
+              <p class="card-text">{{item.description}}</p>
+              <p class="card-text"><small class="text-muted">{{item.new_price_after_dicount}}</small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    {% endif %}
+           
+</div>
+{% endblock content %}
+    

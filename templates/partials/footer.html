@@ -1,0 +1,67 @@
+<div class="b-example-divider"></div>
+
+
+<div class="container">
+  <footer class="py-5">
+    <div class="row">
+      <div class="col-6 col-md-2 mb-3">
+        <h5>Categorys</h5>
+        
+        {% for item in catrogrys %}
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="{% url 'store:filter_category' item.slug %}" class="nav-link p-0 text-muted">{{item.name}}</a></li>
+        </ul>
+        {% endfor %}
+      </div>
+
+      <div class="col-6 col-md-2 mb-3">
+        <h5>Brands</h5>
+        
+        {% for item in brands %}
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="{% url 'store:filter_brand' item.category.slug item.brand.slug %}" class="nav-link p-0 text-muted">{{item.brand.name}}</a></li>
+        </ul>
+        {% endfor %}
+      </div>
+
+       <div class="col-6 col-md-2 mb-3">
+        <h5>Filter Price</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="{% url 'store:filter_price' 'below1000' %}" class="nav-link p-0 text-muted">Below 1000</a></li>
+          <li class="nav-item mb-2"><a href="{% url 'store:filter_price' 'below2000' %}" class="nav-link p-0 text-muted">Below 2000</a></li>
+          <li class="nav-item mb-2"><a href="{% url 'store:filter_price' 'below3000' %}" class="nav-link p-0 text-muted">Below 3000</a></li>
+          <li class="nav-item mb-2"><a href="{% url 'store:filter_price' 'below4000' %}" class="nav-link p-0 text-muted">Below 4000</a></li>
+          <li class="nav-item mb-2"><a href="{% url 'store:filter_price' 'above5000' %}" class="nav-link p-0 text-muted">Above 5000</a></li>
+          <li class="nav-item mb-2"><a href="{% url 'store:filter_price' 'above8000' %}" class="nav-link p-0 text-muted">Above 8000</a></li>
+          <li class="nav-item mb-2"><a href="{% url 'store:filter_price' 'above10000' %}" class="nav-link p-0 text-muted">Above 10000</a></li>
+          <li class="nav-item mb-2"><a href="{% url 'store:filter_price' 'above15000' %}" class="nav-link p-0 text-muted">Above 15000</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-5 offset-md-1 mb-3">
+        <form method="post" action="{% url 'users:subscribe' %}">
+          
+          
+            
+          {% csrf_token %}
+          <h5>Subscribe to our newsletter</h5>
+          <p>Monthly digest of what's new and exciting from us.</p>
+          <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+            <label for="newsletter1" class="visually-hidden">Email address</label>
+            <input id="newsletter1" name="news_email" type="email" class="form-control" placeholder="Email address">
+            <button class="btn btn-primary" type="submit">Subscribe</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+      <p>&copy; 2022 Company, Inc. All rights reserved.</p>
+      <ul class="list-unstyled d-flex">
+        <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
+        <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
+        <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
+      </ul>
+    </div>
+  </footer>
+</div>

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{profile.user.username}}
+{% endblock title %}
+    
+
+{% block content %}
+    <div class="container">
+        <div class="card container" style="width: 18rem;">
+            <img src="{{profile.avatar_url}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">
+              {% if profile.user.first_name %}
+                {{profile.user.first_name}} {{profile.user.last_name}}
+              {% else %}
+              @username: <b>{{profile.user}}</b>
+              {% endif %}
+                </h5>
+              <p class="card-text">{{profile.bio}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                {% if profile.user.date_of_birth %}
+                Date of Birth: {{profile.user.date_of_birth}} | <b>{{profile.user_age}}Years</b></li>
+                {% endif %}  
+              <li class="list-group-item">
+              {% if profile.user.gender %}
+              Gender: {{profile.user.gender}}
+              {% endif %}
+                </li>
+              <li class="list-group-item">{% if profile.nationality %}
+                Nationality: {{profile.nationality}}
+              {% endif %}</li>
+            </ul>
+            <div class="card-body">
+              
+              {% if profile.is_buyer %}
+              <a href="{% url 'accounts:my_account' %}" class="card-link">View Your Buyer Account</a>
+              {% else %}
+              <a href="{% url 'accounts:create_account' %}" class="card-link">Create Buyer Account</a>
+              {% endif %}
+                
+              
+            </div>
+          </div>
+    </div>
+   
+{% endblock content %}
+    

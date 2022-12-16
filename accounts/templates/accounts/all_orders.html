@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    your orders | {{buyer.buyer.user}}
+{% endblock title %}
+    
+
+{% block content %}
+  <a href="{% url 'accounts:my_orders_and_sales_done' 'done' %}"> orders is done</a>
+    <div class="container">
+        <table class="table table-bordered border-primary">
+            <thead>
+              <tr>
+                <th scope="col">Number</th>
+                <th scope="col">Client</th>
+                <th scope="col">Product</th>
+                <th scope="col">Status</th>
+                <th scope="col">Quantity</th>
+              </tr>
+            </thead>
+            <tbody class="table-group-divider">
+              
+              {% for item in all_orders %}
+              <tr>
+                <th scope="row"><a href="{% url 'accounts:detail_order' item.pk %}">{{forloop.counter}}</a></th>
+                <td>{{item.user_order.user}}</td>
+                <td>{{item.product}}</td>
+                <td>
+                {% if item.status == 'tm' %}
+                The request was successful
+                {% elif item.status == 'dr' %}
+                Delivery is underway
+                {% elif item.status == 'sdh' %}
+                sent delivered handed
+                {% endif %}
+                  </td>
+                <td class="badge bg-primary rounded-pill">{{item.quantity}}</td>
+              </tr>
+              {% endfor %} 
+            </tbody>
+          </table>
+    </div>
+{% endblock content %}
+    

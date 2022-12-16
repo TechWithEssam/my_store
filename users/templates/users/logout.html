@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}
+    logout
+{% endblock title %}
+
+{% block content %}
+
+<div class="mb-3">
+<form method="post" action="" novalidate>
+        {% csrf_token %}
+        <p>
+            are you sure you want to logout? {{request.user.username}}
+        </p>
+      <button type="submit" class="btn btn-primary mt-3">Yes</button>
+  </form>
+</div>
+{% endblock content %}
+    
